@@ -21,33 +21,294 @@
 
   ```javascript
     {
-        username: "user",
-        email: "user@mail.com",
-        password: "12345"
+      username: "user",
+      email: "user@mail.com",
+      password: "12345"
     }
   ```
 
 * **Success Response:**
 
-  * **Code:** 201 <br / 
+  * **Code:** 201 <br />
+    **Content:** `{ message: "Success register" }`
+ 
+* **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ message: "password cannot less than 5 character" }`
+    **Content:** `{ message: "Password cannot less than 5 characters" }`
 
   OR
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ message: "username cannot be empty" }`
+    **Content:** `{ message: "Password cannot be empty" }`
+
+  OR
+
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ message: "Username cannot be empty" }`
   
   OR
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ message: "email cannot be empty" }`
+    **Content:** `{ message: "Email cannot be empty" }`
   
   OR
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ message: "email must contain email format" }`
+    **Content:** `{ message: "Email must contain email format" }`
+  
+  OR
+
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ message: "Email already in use" }`
+
+  OR
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ message: "Internal Server Error" }`
+
+**Login**
+----
+  
+* **URL**
+
+  `http://localhost:3000/login`
+
+* **Method:**
+
+  `POST`
+  
+*  **URL Params**
+
+    None
+
+* **Data Params**
+
+    **Required:**
+
+  ```javascript
+    {
+      email: "user@mail.com",
+      password: "12345"
+    }
+  ```
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** 
+
+  ```javascript
+    {
+      token: "<token>",
+      message: "Success login as <username>"
+    }
+  ```
+ 
+* **Error Response:**
+
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ message: "Invalid email / password" }`
+
+  OR
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ message: "Internal Server Error" }`
+
+**Create Task**
+----
+  
+* **URL**
+
+  `http://localhost:3000/task`
+
+* **Method:**
+
+  `POST`
+  
+*  **URL Params**
+
+    None
+
+* **Data Params**
+
+    **Required:**
+
+  ```javascript
+    {
+      title: "<your title>"
+    }
+  ```
+
+*  **URL headers**
+
+    **Required:**
+
+    `token=[string]`
+
+* **Success Response:**
+
+  * **Code:** 201 <br />
+    **Content:** 
+
+  ```javascript
+    {
+      message: "Success create new KanbaN"
+    }
+  ```
+ 
+* **Error Response:**
+
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ message: "Title cannot be empty" }`
+
+  OR
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ message: "Internal Server Error" }`
+
+**Find All Task**
+----
+  
+* **URL**
+
+  `http://localhost:3000/task`
+
+* **Method:**
+
+  `GET`
+  
+*  **URL Params**
+
+    None
+
+* **Data Params**
+
+    None
+
+*  **URL headers**
+
+    **Required:**
+
+    `token=[string]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** 
+
+  ```javascript
+    {
+      data: [
+        { 
+          title: "<title>",
+          CategoryId: "<category id>"
+        }
+       ]
+    }
+  ```
+ 
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ message: "Internal Server Error" }`
+
+**Update Task**
+----
+  
+* **URL**
+
+  `http://localhost:3000/task/:id`
+
+* **Method:**
+
+  `PUT`
+  
+*  **URL Params**
+
+    **Required:**
+
+    `id=[integer]`
+
+* **Data Params**
+
+    **Required:**
+
+  ```javascript
+    {
+      title: "<your new title>"
+    }
+  ```
+
+*  **URL headers**
+
+    **Required:**
+
+    `token=[string]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** 
+
+  ```javascript
+    {
+      message: "Success update KanbaN"
+    }
+  ```
+ 
+* **Error Response:**
+
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ message: "Title cannot be empty" }`
+
+  OR
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ message: "Internal Server Error" }`
+
+**Delete Task**
+----
+  
+* **URL**
+
+  `http://localhost:3000/task:id`
+
+* **Method:**
+
+  `DELETE`
+  
+*  **URL Params**
+
+    **Required:**
+
+    `id=[integer]`
+
+* **Data Params**
+
+    None
+
+*  **URL headers**
+
+    **Required:**
+
+    `token=[string]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** 
+
+  ```javascript
+    {
+      message: "Success delete KanbaN"
+    }
+  ```
+ 
+* **Error Response:**
+
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ message: "Title cannot be empty" }`
 
   OR
 

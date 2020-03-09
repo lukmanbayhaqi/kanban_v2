@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "postgres",
-    "password": "postgres",
-    "database": "kanban_v2",
+    "password": "081219593553",
+    "database": "kanban-chrome-fox",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
